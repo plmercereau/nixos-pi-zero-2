@@ -1,6 +1,11 @@
 # Building a NixOS SD image for a Raspberry Pi Zero 2
 
-1. Change your Wifi settings and create an admin user in `zero2w.nix`
+1. Update `zero2w.nix`
+
+In particular, don't forget:
+- to configure your wifi
+- to add an admin user able to connect through ssh
+
 2. Build the image
 ```sh
 nix build -L .#nixosConfigurations.zero2w.config.system.build.sdImage
@@ -20,16 +25,7 @@ sudo dd if=result/sd-image/zero2.img of=$DEVICE bs=1M conv=fsync status=progress
 ifconfig wlan0
 ```
 
-6. Change the `nixos` user password
-
-```sh
-passwd
-```
-7. Update `zero2w.nix`
-
-In particular, don't forget to add an admin user able to connect through ssh!
-
-8. From another machine, rebuild the system:
+6. From another machine, rebuild the system:
 ```sh
 ZERO2_IP=<the-zero2-ip>
 SSH_USER=<the-admin-user-in-the-pi>
