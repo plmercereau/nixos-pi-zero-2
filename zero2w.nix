@@ -9,6 +9,8 @@
   ];
 
   nixpkgs.hostPlatform = "aarch64-linux";
+  # ! Need a trusted user for deploy-rs.
+  nix.settings.trusted-users = [ "bob" ];
   system.stateVersion = "23.11";
 
   zramSwap = {
@@ -88,6 +90,6 @@
     enable = true;
     wheelNeedsPassword = false;
   };
-
+  # ! Be sure to change the autologinUser.
   services.getty.autologinUser = "bob";
 }
