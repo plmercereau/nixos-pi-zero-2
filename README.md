@@ -1,4 +1,4 @@
-# Building a NixOS SD image for a Raspberry Pi Zero 2
+# Building a NixOS SD image for a Raspberry Pi Zero 2 w
 
 1. Update `zero2w.nix`
 
