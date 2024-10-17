@@ -8,10 +8,18 @@
     ./sd-image.nix
   ];
 
+  # Some packages (ahci fail... this bypasses that) https://discourse.nixos.org/t/does-pkgs-linuxpackages-rpi3-build-all-required-kernel-modules/42509
+  nixpkgs.overlays = [
+    (final: super: {
+      makeModulesClosure = x:
+        super.makeModulesClosure (x // { allowMissing = true; });
+    })
+  ];
+
   nixpkgs.hostPlatform = "aarch64-linux";
   # ! Need a trusted user for deploy-rs.
   nix.settings.trusted-users = ["@wheel"];
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 
   zramSwap = {
     enable = true;
@@ -42,8 +50,7 @@
   hardware.firmware = [pkgs.raspberrypiWirelessFirmware];
 
   boot = {
-    # TODO doesn't work
-    # kernelPackages = pkgs.linuxKernel.packages.linux_rpi3;
+    kernelPackages = pkgs.linuxPackages_rpi02w;
 
     initrd.availableKernelModules = ["xhci_pci" "usbhid" "usb_storage"];
     loader = {
