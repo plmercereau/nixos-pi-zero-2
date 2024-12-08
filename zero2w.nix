@@ -45,9 +45,30 @@
     };
   };
 
-  # Keep this to make sure wifi works
-  hardware.enableRedistributableFirmware = lib.mkForce false;
-  hardware.firmware = [pkgs.raspberrypiWirelessFirmware];
+  hardware = {
+    enableRedistributableFirmware = lib.mkForce false;
+    firmware = [pkgs.raspberrypiWirelessFirmware]; # Keep this to make sure wifi works
+    i2c.enable = true;
+    deviceTree.filter = "bcm2837-rpi-zero*.dtb";
+    deviceTree.overlays = [
+      {
+        name = "enable-i2c";
+        dtsText = ''
+          /dts-v1/;
+          /plugin/;
+          / {
+            compatible = "brcm,bcm2837";
+            fragment@0 {
+              target = <&i2c1>;
+              __overlay__ {
+                status = "okay";
+              };
+            };
+          };
+        '';
+      }
+    ];
+  };
 
   boot = {
     kernelPackages = pkgs.linuxPackages_rpi02w;

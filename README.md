@@ -38,6 +38,7 @@ nix run github:serokell/deploy-rs .#zero2w -- --ssh-user $SSH_USER --hostname $Z
   - Note that `nixos-rebuild --target-host` would work instead of using `deploy-rs`. but as `nixos-rebuild` is not available on Darwin, I'm using `deploy-rs` that works both on NixOS and Darwin.
 - I still couldn't find a way to use `boot.kernelPackages = pkgs.linuxKernel.packages.linux_rpi3`. 
 - the `sdImage.extraFirmwareConfig` option is not ideal as it cannot update `config.txt` after it is created in the sd image.
+- An overlay in the `hardware.deviceTree` has activated the i2c bus. This means that the `i2c-tools` are now working!
 
 ## See also
 - [this issue](https://github.com/NixOS/nixpkgs/issues/216886)
