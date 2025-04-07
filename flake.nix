@@ -2,7 +2,7 @@
   description = "Flake for building a Raspberry Pi Zero 2 SD image";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     deploy-rs.url = "github:serokell/deploy-rs";
   };
 
