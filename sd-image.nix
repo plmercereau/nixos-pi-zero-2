@@ -31,7 +31,8 @@
             config=firmware/config.txt
             # The initial file has just been created without write permissions. Add them to be able to append the file.
             chmod u+w $config
-            echo "\n# Extra configuration" >> $config
+            echo "" >> $config
+            echo "# Extra configuration" >> $config
             echo "${extraFirmwareConfigString}" >> $config
             chmod u-w $config
           ''
