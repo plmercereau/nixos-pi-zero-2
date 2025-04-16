@@ -1,8 +1,5 @@
 name: Build SD Image
-on:
-  push:
-    branches: [ "main" ]
-
+on: push
 jobs:
   build_sd_image_x86:
     runs-on: ubuntu-24.04
