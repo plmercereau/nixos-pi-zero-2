@@ -20,7 +20,7 @@ jobs:
           path: ./result/sd-image/zero2.img
 
   build_sd_image_aarch64:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-24.04-arm
     timeout-minutes: 120
     if: ${{ success() }} 
     steps:
