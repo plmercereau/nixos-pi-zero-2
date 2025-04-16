@@ -7,10 +7,14 @@ In particular, don't forget:
 - to add an admin user able to connect through ssh
 
 2. Build the image
+From an x86_64-linux host machine, run:
 ```sh
-nix build -L .#nixosConfigurations.zero2w.config.system.build.sdImage
+nix build -L .#nixosConfigurations.x86_64-linux.zero2w.config.system.build.sdImage
 ```
-
+From an aarch64 host machine, run:
+```sh
+nix build -L .#nixosConfigurations.aarch64-linux.zero2w.config.system.build.sdImage
+```
 3. Copy the image in your sd card
 
 ```sh
