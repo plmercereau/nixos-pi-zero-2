@@ -1,24 +1,6 @@
 name: Build SD Image
 on: push
 jobs:
-  build_sd_image_x86:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 360
-    if: ${{ success() }} 
-    steps:
-      - name: Git checkout
-        uses: actions/checkout@v4
-      - uses: DeterminateSystems/nix-installer-action@main
-      - uses: DeterminateSystems/flakehub-cache-action@main
-      - uses: DeterminateSystems/flake-checker-action@main
-      - name: Build nix image
-        run: nix build .#nixosConfigurations.x86_64-linux.zero2w.config.system.build.sdImage
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: xsite-sd-image
-          path: ./result/sd-image/zero2.img
-
   build_sd_image_aarch64:
     runs-on: ubuntu-24.04-arm
     timeout-minutes: 120
