@@ -127,7 +127,7 @@
   services.getty.autologinUser = "bob";
 
   # ! change the host name if you like
-  networking.hostName = "remote";
+  networking.hostName = "pi";
 
   services.avahi = {
     enable = true;
