@@ -125,4 +125,19 @@
   };
   # ! Be sure to change the autologinUser.
   services.getty.autologinUser = "bob";
+
+  # ! change the host name if you like
+  networking.hostName = "pi";
+
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      domain = true;
+      workstation = true;
+    };
+  };
 }
