@@ -64,6 +64,10 @@
           name = "pwm-2chan";
           dtsFile = ./dts/pwm.dts;
         }
+        {
+          name = "spi1-2cs";
+          dtsFile = ./dts/spi.dts;
+        }
       ];
     };
   };

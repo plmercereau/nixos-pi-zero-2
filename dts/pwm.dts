@@ -8,8 +8,8 @@
 		target = <&gpio>;
 		__overlay__ {
 			pwm_pins: pwm_pins {
-				brcm,pins = <18 19>;
-				brcm,function = <2 2>; /* Alt5 */
+				brcm,pins = <12 13>;           /* Moved from 18,19 → 12,13 */
+				brcm,function = <4 4>;         /* Both GPIO12 + GPIO13 use ALT0 for PWM */
 			};
 		};
 	};
