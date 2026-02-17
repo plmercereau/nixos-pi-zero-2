@@ -1,5 +1,38 @@
 # Building a NixOS SD image for a Raspberry Pi Zero 2 w
 
+## Usage
+
+### With an existing flake setup
+
+Add the falke into the inputs:
+```nix
+  inputs = {
+    nixos-pi-zero-2 = {
+      url = "github:plmercereau/nixos-pi-zero-2";
+    };
+  };
+```
+
+Use it in the outputs:
+
+```nix
+  outputs = {}: {
+    nixosConfigurations = {
+      zero2w = nixpkgs.lib.nixosSystem {
+        modules = [
+          nixos-pi-zero-2.nixosModules.sd-image
+          nixos-pi-zero-2.nixosModules.hardware
+          {
+            # Configure your machine here. Head to zero2w.nix for opiniotaned defaults.
+          }
+        ];
+      };
+    };
+  };
+```
+
+### On its own
+
 1. Update `zero2w.nix`
 
 In particular, don't forget:

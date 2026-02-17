@@ -2,19 +2,19 @@
   description = "Flake for building a Raspberry Pi Zero 2 SD image";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     flake-utils.url = "github:numtide/flake-utils";
     deploy-rs.url = "github:serokell/deploy-rs";
   };
 
   outputs = inputs: 
-   with inputs;
-      flake-utils.lib.eachDefaultSystem (system: let
-        pkgs = nixpkgs.legacyPackages."${system}";
-        crossPkgs = import "${nixpkgs}" { 
-          localSystem = system;
-          crossSystem = "aarch64-linux";
-        };
+    with inputs;
+    flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = nixpkgs.legacyPackages."${system}";
+      crossPkgs = import "${nixpkgs}" {
+        localSystem = system;
+        crossSystem = "aarch64-linux";
+      };
     in rec {
       nixosConfigurations = {
         zero2w = nixpkgs.lib.nixosSystem {
@@ -38,6 +38,15 @@
           };
         };
       };
-    }
-  );
+    }) // {
+      nixosModules.sd-image = {inputs, ...}: {
+        imports = [
+           "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+          ./sd-image.nix
+          ./sd-defaults.nix
+        ];
+      };
+
+      nixosModules.hardware = ./hardware.nix
+    };
 }
